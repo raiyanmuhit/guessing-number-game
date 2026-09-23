@@ -9,16 +9,21 @@
 <body>
 
 <div class="game-card">
-  <h1>-+- WELCOME TO GUESSING NUMBER GAME -+-</h1>
+  <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">☀️ Light Mode</button>
+  <h1>WELCOME TO GUESSING NUMBER GAME</h1>
   <p>Guess a Number Between 1 - 100</p>
+
+  <div id="triesCounter" class="tries-counter">Tries Left: 5</div>
   
   <div class="input-group">
-    <input type="number" id="guessInput" min="1" max="100" placeholder="Please, Enter your number:">
+    <input type="number" id="guessInput" min="1" max="100" placeholder="Please, Enter your number:" oninput="validateInput(this)">
     <button id="submitBtn" onclick="checkGuess()">Submit</button>
   </div>
   
   <div id="message" class="message"></div>
   <button id="restartBtn" class="restart-btn" onclick="initGame()">Play Again</button>
+
+  <footer class="game-footer">Made By R3, Do not copy this project</footer>
 </div>
 
 <script src="script.js"></script>

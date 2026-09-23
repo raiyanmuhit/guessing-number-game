@@ -1,6 +1,21 @@
 let num;
 let count;
+const maxTries = 5;
 let gameOver;
+
+function validateInput(input) {
+  if (parseInt(input.value) > 100) {
+    input.value = 100;
+  } else if (parseInt(input.value) < 1) {
+    input.value = 1;
+  }
+}
+
+function updateTriesDisplay() {
+  const triesLeft = maxTries - count + 1;
+  const triesEl = document.getElementById('triesCounter');
+  triesEl.innerText = gameOver ? `Tries Left: 0` : `Tries Left: ${triesLeft}`;
+}
 
 function initGame() {
   num = Math.floor(Math.random() * 100) + 1;
@@ -12,6 +27,8 @@ function initGame() {
   document.getElementById('submitBtn').disabled = false;
   document.getElementById('message').innerText = '';
   document.getElementById('restartBtn').style.display = 'none';
+  
+  updateTriesDisplay();
 }
 
 function checkGuess() {
@@ -21,16 +38,16 @@ function checkGuess() {
   const messageEl = document.getElementById('message');
   const guess = parseInt(inputEl.value);
 
-  if (isNaN(guess)) {
-    messageEl.innerText = "Please enter a valid number!";
+  if (isNaN(guess) || guess < 1 || guess > 100) {
+    messageEl.innerText = "Please enter a valid number between 1 and 100!";
     return;
   }
 
-  if (guess === num && count <= 5) {
+  if (guess === num && count <= maxTries) {
     messageEl.innerHTML = `Yaaaaaaaaay! You won!!!<br>You Tried ${count} times to WIN!`;
     endGame();
   } else if (guess < num) {
-    if (count >= 5) {
+    if (count >= maxTries) {
       messageEl.innerText = "U R a Dumbass than a S##T!";
       endGame();
     } else {
@@ -38,7 +55,7 @@ function checkGuess() {
       count++;
     }
   } else if (guess > num) {
-    if (count >= 5) {
+    if (count >= maxTries) {
       messageEl.innerText = "U R a Dumbass than a S##T!";
       endGame();
     } else {
@@ -46,6 +63,8 @@ function checkGuess() {
       count++;
     }
   }
+
+  updateTriesDisplay();
 }
 
 function endGame() {
@@ -53,6 +72,19 @@ function endGame() {
   document.getElementById('guessInput').disabled = true;
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('restartBtn').style.display = 'block';
+}
+
+function toggleTheme() {
+  const body = document.body;
+  const toggleBtn = document.getElementById('themeToggle');
+  
+  body.classList.toggle('light-theme');
+  
+  if (body.classList.contains('light-theme')) {
+    toggleBtn.innerText = '🌙 Dark Mode';
+  } else {
+    toggleBtn.innerText = '☀️ Light Mode';
+  }
 }
 
 document.getElementById('guessInput').addEventListener('keypress', function (e) {
