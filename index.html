@@ -8,10 +8,31 @@
 </head>
 <body>
 
-<div class="game-card">
-  <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">☀️ Light Mode</button>
-  <h1>WELCOME TO GUESSING NUMBER GAME</h1>
-  <p>Guess a Number Between 1 - 100</p>
+<!-- Language Toggle Switch (Top-Right) -->
+<div class="top-controls">
+  <div class="lang-toggle-container">
+    <span class="lang-label">EN</span>
+    <label class="switch">
+      <input type="checkbox" id="langToggle" onchange="toggleLanguage()">
+      <span class="slider round"></span>
+    </label>
+    <span class="lang-label">বাং</span>
+  </div>
+</div>
+
+<div class="game-card" id="gameCard">
+  <!-- Theme Toggle Switch -->
+  <div class="theme-switch-container">
+    <span id="themeLabel">☀️</span>
+    <label class="switch">
+      <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+      <span class="slider round"></span>
+    </label>
+    <span>🌙</span>
+  </div>
+
+  <h1 id="titleText">WELCOME TO GUESSING NUMBER GAME</h1>
+  <p id="subtitleText">Guess a Number Between 1 - 100</p>
 
   <div id="triesCounter" class="tries-counter">Tries Left: 5</div>
   
@@ -23,7 +44,13 @@
   <div id="message" class="message"></div>
   <button id="restartBtn" class="restart-btn" onclick="initGame()">Play Again</button>
 
-  <footer class="game-footer">Made By R3, Do not copy this project</footer>
+  <footer class="game-footer" id="footerText">Made By R3, Do not copy this project</footer>
+</div>
+
+<!-- Bottom-Right Branding -->
+<div class="bottom-right-watermark">
+  <div>v0.2</div>
+  <div>R3-DEV©</div>
 </div>
 
 <script src="script.js"></script>
